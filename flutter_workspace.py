@@ -2266,7 +2266,7 @@ def install_minimum_runtime_deps():
             subprocess.call(cmd)
 
             packages = 'git git-lfs curl python3-pycurl python3-pip libcurl4-openssl-dev libssl-dev libgtk-3-dev python*-venv python3-toml python3-dotenv python3-pip python3-dev build-essential libcurl4-openssl-dev'
-            cmd = ["sudo", "apt-get", "install", "-y", packages]
+            cmd = ["sudo apt install -y ", packages]
             subprocess.call(cmd)
             #cmd = ['sudo', 'apt', 'update', '-y']
             #subprocess.check_output(cmd)
