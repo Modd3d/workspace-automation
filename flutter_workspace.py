@@ -2262,18 +2262,20 @@ def install_minimum_runtime_deps():
         os_release_id = get_freedesktop_os_release_id()
 
         if os_release_id == 'ubuntu':
-            cmd = ['sudo', 'apt', 'update', '-y']
-            subprocess.call(cmd)
+            # Update package lists
+            subprocess.run(['sudo', 'apt', 'update', '-y'], check=True)
 
-            packages = 'git git-lfs curl python3-pycurl python3-pip libcurl4-openssl-dev libssl-dev libgtk-3-dev python*-venv python3-toml python3-dotenv python3-pip python3-dev build-essential libcurl4-openssl-dev'
-            cmd = ["sudo apt install -y ", packages]
-            subprocess.call(cmd)
-            #cmd = ['sudo', 'apt', 'update', '-y']
-            #subprocess.check_output(cmd)
-            #packages = 'git git-lfs curl python3-pip libcurl4-openssl-dev libssl-dev libgtk-3-dev python*-venv python3-pycurl python3-toml python3-dotenv python3-pip python3-dev build-essential libcurl4-openssl-dev'.split(' ')
-            #for package in packages:
-                #ubuntu_install_pkg_if_not_installed(package)
+            # Define package list
+            packages = [
+                'git', 'git-lfs', 'curl', 'python3-pycurl', 'python3-pip',
+                'libcurl4-openssl-dev', 'libssl-dev', 'libgtk-3-dev', 
+                'python3-venv', 'python3-toml', 'python3-dotenv', 'python3-dev',
+                'build-essential'
+            ]
 
+            # Install all packages
+            subprocess.run(['sudo', 'apt', 'install', '-y'] + packages, check=True)
+            
         elif os_release_id == 'fedora':
             cmd = ['sudo', 'dnf', '-y', 'update']
             subprocess.check_output(cmd)
